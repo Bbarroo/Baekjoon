@@ -1,4 +1,5 @@
 import sys
 
 a = sys.stdin.readline().rstrip()
-x,y = int(a.split(" "))
+k = list(range(0,10,0))
+print(k)
