@@ -35,10 +35,8 @@ class Segment_Tree:
     def sum(self,left,right):
         return self.sum_recur(0,len(self.lst)-1,1,left-1,right-1)
     
-    def changeValue_recur(self,start,end,idx,target_idx,target):
-        valued = lst[target_idx]
-        lst[target_idx] = target
-        delta = target - valued
+    def changeValue_recur(self,start,end,idx,target_idx,target,delta):
+
         
         if target_idx > end or target_idx < start:
             return 0
@@ -47,12 +45,15 @@ class Segment_Tree:
         if start == end: 
             return 0 
         mid = int((start + end)/2)
-        self.changeValue_recur(start,mid,idx*2,target_idx,target)
-        self.changeValue_recur(mid+1,end,idx*2+1,target_idx,target)
+        self.changeValue_recur(start,mid,idx*2,target_idx,target,delta)
+        self.changeValue_recur(mid+1,end,idx*2+1,target_idx,target,delta)
         return self.tree[idx]
     
     def changeValue(self,target,change_num):
-        return self.changeValue_recur(0,len(self.lst)-1,1,target-1,change_num)
+        valued = self.lst[target-1]
+        self.lst[target-1] = change_num
+        delta = change_num - valued
+        return self.changeValue_recur(0,len(self.lst)-1,1,target-1,change_num,delta)
     
     def showTree(self):
         print(self.tree)
