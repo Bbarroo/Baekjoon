@@ -1,4 +1,4 @@
 import sys
 
 a = sys.stdin.readline().rstrip()
-print(ord(a))
+print(ord(a)-65)
